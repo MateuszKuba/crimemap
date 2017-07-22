@@ -7,7 +7,8 @@ Created on Sat Jul 22 14:42:43 2017
 
 import pymysql
 import dbconfig
-connection = pymysql.connect(host='localhost',
+connection = pymysql.connect(host='127.0.0.1',
+                             port = 3306,
                              user=dbconfig.db_user,
                              passwd=dbconfig.db_password)
 
