@@ -9,6 +9,11 @@
     <script type="text/javascript">
         var map;   //zmienna globalna
         var marker; //zmienan globalna
+             
+        
+        // additional
+        
+        //https://developers.google.com/maps/documentation/javascript/reference?hl=en#Animation
         function initialize() { 
         var mapOptions = {
           center: new google.maps.LatLng(- 33.30578381949298, 26.523442268371582),
@@ -18,7 +23,19 @@
         google.maps.event.addListener(map,'click',function(event){
             placeMarker(event.latLng);        
         });
+        placeCrimes({{crimes | safe }})
       }
+        function placeCrimes(crimes) {
+         for (i=0; i<crimes.length; i++) {
+          crime = new google.maps.Marker( {
+               position: new google.maps.LatLng(crimes[i].latitude, crimes[i].longitude),
+               map: map,
+               label: {text:  crimes[i].date + "\n" + crimes[i].category + "\n" + crimes[i].description, color: "white"},
+               title: crimes[i].date + "\n" + crimes[i].category + "\n" + crimes[i].description
+           }
+          );
+         }
+        }        
       
         function placeMarker(location){
             if(marker){
